@@ -3,9 +3,9 @@
 {% block title %}Employee index{% endblock %}
 
 {% block body %}
-    <h1>Employee index</h1>
+    <h1>Reporte empleados</h1>
 
-    <table class="table">
+    <table class="table table-striped table-bordered" style="background-color: white;">
         <thead>
             <tr>
                 <th>NOMBRE EMPLEADOR</th>
@@ -38,6 +38,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('employee_new') }}">Create new</a>
 {% endblock %}

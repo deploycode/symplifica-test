@@ -39,7 +39,7 @@ class EmployeeController extends AbstractController
     public function new_employee(Request $request): Response
     {
         $employee = new Employee();
-        $form = $this->createForm(EmployeeType::class, $employee);
+        $form = $this->createForm(EmployeeType::class, $employee, array('is_employee'=>true));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -52,6 +52,7 @@ class EmployeeController extends AbstractController
 
         return $this->render('employee/new.html.twig', [
             'employee' => $employee,
+            'is_employee'=>true,
             'form' => $form->createView(),
         ]);
     }
@@ -75,6 +76,7 @@ class EmployeeController extends AbstractController
 
         return $this->render('employee/new.html.twig', [
             'employee' => $employee,
+            'is_employee'=>false,
             'form' => $form->createView(),
         ]);
     }

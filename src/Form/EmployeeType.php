@@ -16,46 +16,74 @@ class EmployeeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('name',TextType::class, ['label' => 'Nombre'])
-            ->add('gender' , ChoiceType::class,
-
-                array(
-                    'choices' => array(
-                        'Mujer'       => 'FEMALE',
-                        'Hombre'      => 'MALE',
-                    ),
-                    'label' => 'Género'
+            $builder
+                ->add('name',TextType::class, array('label' => 'Nombre','attr' => array('class' =>'form-control')))
+                ->add('gender' , ChoiceType::class,
+                    array(
+                        'choices' => array(
+                            'Mujer'       => 'FEMALE',
+                            'Hombre'      => 'MALE',
+                        ),
+                        'label' => '* Género',
+                        'attr' =>array('class' =>'form-control')
+                    )
                 )
-            )
-            ->add('identification_number',TextType::class, ['label' => 'Cedula'])
-            ->add('phone_number',TextType::class, ['label' => 'Teléfono'])
-            ->add('address',TextType::class, ['label' => 'Dirección'])
-            ->add('date_of_birth',DateType::class, ['label' => 'Fecha de nacimiento'])
-            ->add('type_of_contract', ChoiceType::class,
-                array(
-                    'choices' => array(
-                        'Término indefinido'       => 'TERMINO INDEFINIDO',
-                        'Termino definido'      => 'TERMINO DEFINIDO',
-                        'Tiempo parcial'        => 'TIEMPO PARCIAL',
-                    ),
-                    'label' => 'Tipo de contrato'
+                ->add('identification_number',TextType::class, array(
+                    'label' => 'Cedula',
+                    'attr'    =>array(
+                        'class'         =>'form-control')
                 ))
-            ->add('boss',EntityType::class, [
-                'class' => Employee::class,
-                'query_builder' => function (EntityRepository $er) {
-                return $er->createQueryBuilder('e')
-                ->orderBy('e.name', 'ASC');
-        },
-        'choice_label' => 'name',
-                'label' => 'Empleador'])
-        ;
+                ->add('phone_number',TextType::class, array(
+                    'label' => 'Teléfono',
+                    'attr'    =>array(
+                        'class'         =>'form-control')
+                ))
+                ;
+        if($options['is_employee']){
+            $builder
+                ->add('type_of_contract', ChoiceType::class,
+                    array(
+                        'choices' => array(
+                            'Término indefinido'       => 'TERMINO INDEFINIDO',
+                            'Termino definido'      => 'TERMINO DEFINIDO',
+                            'Tiempo parcial'        => 'TIEMPO PARCIAL',
+                        ),
+                        'label' => 'Tipo de contrato',
+                        'attr' =>array('class' =>'form-control')
+                    ))
+                ->add('boss',EntityType::class, [
+                    'class' => Employee::class,
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('e')
+                            ->orderBy('e.name', 'ASC');
+                    },
+                    'choice_label' => 'name',
+                    'label' => 'Empleador',
+                    'attr' =>array('class' =>'form-control')])
+            ;
+        }else{
+            $builder
+
+                ->add('address',TextType::class, array(
+                    'label' => 'Dirección',
+                     'attr'    =>array(
+                            'class'         =>'form-control')
+                ))
+                ->add('date_of_birth',DateType::class, array(
+                    'label' => 'Fecha de nacimiento',
+                    'attr'    =>array(
+                        'class'         =>'form-control')
+                ))
+            ;
+        }
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => Employee::class,
+            'is_employee' => 0,
         ]);
     }
 }

@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Employee{% endblock %}
+{% block title %}Nuevo{% endblock %}
 
 {% block body %}
-    <h1>Create new Employee</h1>
+    {% if is_employee %}
+        <h1>Nuevo empleado</h1>
+    {% else %}
+        <h1>Nuevo empleador</h1>
+    {% endif %}
 
     {{ include('employee/_form.html.twig') }}
 
-    <a href="{{ path('employee_index') }}">back to list</a>
+    <a href="{{ path('employee_index') }}">Volver al listado</a>
 {% endblock %}
