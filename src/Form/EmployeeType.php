@@ -6,6 +6,8 @@ use App\Entity\Employee;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class EmployeeType extends AbstractType
 {
@@ -19,7 +21,13 @@ class EmployeeType extends AbstractType
             ->add('address')
             ->add('date_of_birth')
             ->add('type_of_contract')
-            ->add('boss')
+            ->add('boss',EntityType::class, [
+                'class' => Employee::class,
+                'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('e')
+                ->orderBy('e.name', 'ASC');
+        },
+        'choice_label' => 'name',])
         ;
     }
 
