@@ -16,6 +16,7 @@
                 <th>Address</th>
                 <th>Date_of_birth</th>
                 <th>Type_of_contract</th>
+                <th>Boss</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -30,6 +31,10 @@
                 <td>{{ employee.address }}</td>
                 <td>{{ employee.dateOfBirth ? employee.dateOfBirth|date('Y-m-d') : '' }}</td>
                 <td>{{ employee.typeOfContract }}</td>
+                {% if employee.boss %}
+                    <td>{{ employee.boss.name }}</td>
+                {% endif %}
+                    <td></td>
                 <td>
                     <a href="{{ path('employee_show', {'id': employee.id}) }}">show</a>
                     <a href="{{ path('employee_edit', {'id': employee.id}) }}">edit</a>
