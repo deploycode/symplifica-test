@@ -25,7 +25,7 @@ class Employee
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=15)
+     * @ORM\Column(type="string", length=15, columnDefinition="ENUM('MALE', 'FEMALE')")
      */
     private $gender;
 
@@ -50,7 +50,7 @@ class Employee
     private $date_of_birth;
 
     /**
-     * @ORM\Column(type="string", length=15, nullable=true)
+     * @ORM\Column(type="string", length=15, nullable=true, columnDefinition="ENUM('TERMINO INDEFINIDO', 'TERMINO DEFINIDO', 'TIEMPO PARCIAL')")
      */
     private $type_of_contract;
 
