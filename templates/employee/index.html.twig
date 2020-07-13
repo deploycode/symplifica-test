@@ -8,38 +8,28 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Gender</th>
-                <th>Identification_number</th>
-                <th>Phone_number</th>
-                <th>Address</th>
-                <th>Date_of_birth</th>
-                <th>Type_of_contract</th>
-                <th>Boss</th>
-                <th>actions</th>
+                <th>NOMBRE EMPLEADOR</th>
+                <th>CEDULA EMPLEADOR</th>
+                <th>DIRECCIÓN EMPLEADOR</th>
+                <th>NOMBRE EMPLEADO</th>
+                <th>CEDULA EMPLEADO</th>
+                <th>TIPO CONTRATO</th>
             </tr>
         </thead>
         <tbody>
         {% for employee in employees %}
-            <tr>
-                <td>{{ employee.id }}</td>
-                <td>{{ employee.name }}</td>
-                <td>{{ employee.gender }}</td>
-                <td>{{ employee.identificationNumber }}</td>
-                <td>{{ employee.phoneNumber }}</td>
-                <td>{{ employee.address }}</td>
-                <td>{{ employee.dateOfBirth ? employee.dateOfBirth|date('Y-m-d') : '' }}</td>
-                <td>{{ employee.typeOfContract }}</td>
-                {% if employee.boss %}
+            {% if employee.boss %}
+                <tr>
                     <td>{{ employee.boss.name }}</td>
-                {% endif %}
-                    <td></td>
-                <td>
-                    <a href="{{ path('employee_show', {'id': employee.id}) }}">show</a>
-                    <a href="{{ path('employee_edit', {'id': employee.id}) }}">edit</a>
-                </td>
-            </tr>
+                    <td>{{ employee.boss.identificationNumber }}</td>
+                    <td>{{ employee.boss.address }}</td>
+
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.identificationNumber }}</td>
+                    <td>{{ employee.typeOfContract }}</td>
+                </tr>
+            {% endif %}
+
         {% else %}
             <tr>
                 <td colspan="9">no records found</td>
