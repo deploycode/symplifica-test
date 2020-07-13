@@ -26,9 +26,40 @@ class EmployeeController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="employee_new", methods={"GET","POST"})
+     * @Route("/home", name="employee_home", methods={"GET"})
      */
-    public function new(Request $request): Response
+    public function home(): Response
+    {
+        return $this->render('home.html.twig');
+    }
+
+    /**
+     * @Route("/new_employee", name="employee_new", methods={"GET","POST"})
+     */
+    public function new_employee(Request $request): Response
+    {
+        $employee = new Employee();
+        $form = $this->createForm(EmployeeType::class, $employee);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($employee);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('employee_index');
+        }
+
+        return $this->render('employee/new.html.twig', [
+            'employee' => $employee,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/new_boss", name="boss_new", methods={"GET","POST"})
+     */
+    public function new_boss(Request $request): Response
     {
         $employee = new Employee();
         $form = $this->createForm(EmployeeType::class, $employee);
