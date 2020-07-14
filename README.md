@@ -15,9 +15,9 @@ Clonar el proyecto :
 	composer install
 
 
-Configurar url de conexión a base de datos el archivo .env
+Configurar url de conexión a base de datos en el archivo .env
 
-    // Por ejemplo éste comando creará la base de datos symplifica-test
+    // Por ejemplo éste configuracion apuntará a la base de datos symplifica-test
     // con usuario root, sin contraseña, en el host 127.0.0.1 y puerto: 3306
     
     DATABASE_URL=mysql://root:@127.0.0.1:3306/symplifica-test?serverVersion=5.7
