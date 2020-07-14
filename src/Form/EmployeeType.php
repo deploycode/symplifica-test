@@ -24,7 +24,7 @@ class EmployeeType extends AbstractType
                             'Mujer'       => 'FEMALE',
                             'Hombre'      => 'MALE',
                         ),
-                        'label' => '* Género',
+                        'label' => 'Género',
                         'attr' =>array('class' =>'form-control')
                     )
                 )
