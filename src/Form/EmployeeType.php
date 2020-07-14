@@ -69,11 +69,11 @@ class EmployeeType extends AbstractType
                      'attr'    =>array(
                             'class'         =>'form-control')
                 ))
-                ->add('date_of_birth',DateType::class, array(
+                ->add('date_of_birth',DateType::class, [
+                    'widget' => 'single_text',
                     'label' => 'Fecha de nacimiento',
-                    'attr'    =>array(
-                        'class'         =>'form-control')
-                ))
+                    'attr' => ['class' =>'form-control']
+                ]);
             ;
         }
 
